@@ -1,47 +1,34 @@
 # AggieProfs
- 
-AggieProfs
+
 AggieProfs is a web application similar to "Rate My Professor," specifically designed for [Your University Name]. It allows students to search for professors, view ratings and reviews, and submit their own feedback.
 
-Getting Started
+## Getting Started
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-Prerequisites
+### Prerequisites
+
 What things you need to install the software and how to install them:
 
-Node.js
-npm (Node Package Manager)
-Git (optional, if you're cloning the repository)
-Installing
+- Node.js
+- npm (Node Package Manager)
+- Git (optional, if you're cloning the repository)
+
+### Installing
+
 A step by step series of examples that tell you how to get a development environment running.
 
-Clone the Repository (if using Git):
+# Step 1: Clone the Repository
 
-bash
-Copy code
-git clone [repository-url]
-Or download and extract the ZIP file of the repository.
+git clone https://github.com/binhdocao/AggieProfs/
 
-Navigate to the Project Directory:
-
-bash
-Copy code
+# Step 2: Navigate to the Project Directory
 cd AggieProfs
-Install Dependencies:
-Run the following command to install the required node modules.
 
-bash
-Copy code
+# Step 3: Install Dependencies
+# This will install all the necessary Node.js modules as defined in 'package.json'
 npm install
-Start the Application:
-To run the application on your local server, execute:
 
-bash
-Copy code
+# Step 4: Start the Application
+# This will start the Node.js server, typically on localhost:3000
 node app.js
-Access the Application:
-Open your web browser and visit http://localhost:3000.
-
-Built With
-Node.js - The JavaScript runtime used
-Express - The web framework for Node.js
