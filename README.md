@@ -16,19 +16,23 @@ What things you need to install the software and how to install them:
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development environment running.
+A step-by-step guide to setting up the development environment:
 
-# Step 1: Clone the Repository
-
+#### Step 1: Clone the Repository
+- Clone the repository using Git:
 git clone https://github.com/binhdocao/AggieProfs/
 
-# Step 2: Navigate to the Project Directory
+
+#### Step 2: Navigate to the Project Directory
+- Change to the project directory:
 cd AggieProfs
 
-# Step 3: Install Dependencies
-# This will install all the necessary Node.js modules as defined in 'package.json'
+
+#### Step 3: Install Dependencies
+- Install all the necessary Node.js modules as defined in 'package.json':
 npm install
 
-# Step 4: Start the Application
-# This will start the Node.js server, typically on localhost:3000
+
+#### Step 4: Start the Application
+- Start the Node.js server, typically on localhost:3000:
 node app.js
