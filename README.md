@@ -1,14 +1,14 @@
 # AggieProfs
 
-AggieProfs is a web application similar to "Rate My Professor," specifically designed for [Your University Name]. It allows students to search for professors, view ratings and reviews, and submit their own feedback.
+AggieProfs is a React-based web application inspired by "Rate My Professor," specifically designed for [Your University Name]. It enables students to search for professors, view ratings and reviews, and submit their own feedback, all within a modern, single-page application interface.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will guide you through getting a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them:
+Before you begin, ensure you have the following installed:
 
 - Node.js
 - npm (Node Package Manager)
@@ -16,12 +16,11 @@ What things you need to install the software and how to install them:
 
 ### Installing
 
-A step-by-step guide to setting up the development environment:
+Follow these step-by-step instructions to set up your development environment:
 
 #### Step 1: Clone the Repository
 - Clone the repository using Git:
 git clone https://github.com/binhdocao/AggieProfs/
-
 
 #### Step 2: Navigate to the Project Directory
 - Change to the project directory:
@@ -33,6 +32,21 @@ cd AggieProfs
 npm install
 
 
-#### Step 4: Start the Application
-- Start the Node.js server, typically on localhost:3000:
-node app.js
+#### Step 4: Start the Development Server
+- Start the React development server, typically on localhost:3000:
+npm start
+
+
+This command will open your default web browser to `http://localhost:3000`, where you can view and interact with your React application.
+
+## Building for Production
+
+To build the application for production, run:
+npm run build
+
+
+This will create a `build` directory with a production build of your app.
+
+## Learn More
+
+To learn React, check out the [React documentation](https://reactjs.org/).
