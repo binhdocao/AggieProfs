@@ -1,26 +1,34 @@
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://aggieStudent:howdy@aggiedata.pvz7zwy.mongodb.net/?retryWrites=true&w=majority";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const express = require('express');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const cors = require('cors');
+const app = express();
 const client = new MongoClient(uri, {
   serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
+    version: ServerApiVersion.v1
   }
 });
 
-async function run() {
+app.use(cors()); // Enable CORS for all routes
+
+app.get('/professors', async (req, res) => {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    const database = client.db("AggieProfs");
+    const professors = database.collection("professors");
+    const professorList = await professors.find({}).toArray();
+    res.json(professorList);
+  } catch (e) {
+    res.status(500).send(e.message);
   } finally {
-    // Ensures that the client will close when you finish/error
     await client.close();
   }
-}
-run().catch(console.dir);
+});
+
+const port = 3001; // Ensure this is a different port from your React app
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

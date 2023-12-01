@@ -11,8 +11,6 @@ function App() {
   
   const professorNames = {}
 
-
-
   return (
     <div className="App">
       <Header />
