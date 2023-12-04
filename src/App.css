@@ -6,9 +6,38 @@ body {
   color: #500000; /* Maroon color */
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root { /* Assuming your root div has the id 'root' */
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.App {
+  flex: 1; /* This will make the .App div take up all available space */
+  text-align: center;
+  padding-bottom: 50px; /* Footer height, to ensure content does not overlap the footer */
+}
+
+/* Other styles remain the same */
+
+.footer {
+  background-color: #500000;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed; /* Changed from absolute to fixed */
+  bottom: 0;
+  width: 100%;
+}
+
 .App {
   text-align: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   position: relative;
   padding-bottom: 50px; /* Footer height */
 }
@@ -27,7 +56,7 @@ body {
 
 .App-header {
   background-color: #f7f3f3;
-  min-height: 100vh;
+  min-height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,8 +78,6 @@ body {
   }
 }
 
-
-/* Style for the search bar container */
 .search-bar-container {
   width: 700px; /* Adjust width as needed */
   margin: 0 auto; /* Centering horizontally */
