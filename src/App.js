@@ -4,31 +4,14 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProfessorPage from './components/Professor'; // Import your ProfessorDetail component
-import Papa from 'papaparse'; // Import papaparse for CSV parsing
-import CourseRecommendationForm from './components/CourseRecommender';
-import ReactDOM from 'react-dom';
+import ProfessorPage from './components/Professor'; 
+import {CSVDataProvider} from './components/CSVFile'; 
+import Course from './components/Course';
 
 function App() {
-  const [csvData, setCsvData] = useState([]);
-
-  useEffect(() => {
-    // Replace 'data/tamu_grade_reports.csv' with the actual path to your CSV file
-    const csvFilePath = './data/tamu_grade_reports.csv';
-
-    Papa.parse(csvFilePath, {
-      header: true,
-      dynamicTyping: true,
-      skipEmptyLines: true,
-      complete: (result) => {
-        // 'result.data' contains the parsed CSV data as an array of objects
-        setCsvData(result.data);
-      },
-    });
-  }, []);
-
 
   return (
+    <CSVDataProvider>
     <div className="App">
       <Router>
         <Header />
@@ -38,16 +21,17 @@ function App() {
             element={
               <div>
                 <SearchBar />
-                <CourseRecommendationForm csvData={csvData} />
               </div>
             }
           />
           <Route path="/professors/:id" element={<ProfessorPage />} />
+          <Route path="/courses/:courseName" element={<Course />} />
           {/* Add other routes as needed */}
         </Routes>
         <Footer />
       </Router>
     </div>
+    </CSVDataProvider>
   );
 }
 

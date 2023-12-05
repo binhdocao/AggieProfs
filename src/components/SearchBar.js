@@ -9,15 +9,26 @@ function SearchBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3001/professors')
-      .then(response => response.json())
-      .then(data => setItems(data.map((prof, index) => ({
-        ...prof, 
-        id: prof._id, // Use MongoDB's _id as the id
-        name: prof.name 
-      }))))
-      .catch(error => console.error('Error fetching data: ', error));
+    Promise.all([
+      fetch('http://localhost:3001/professors').then(res => res.json()),
+      fetch('http://localhost:3001/courses').then(res => res.json())
+    ])
+    .then(([professorsData, coursesData]) => {
+      const formattedProfessors = professorsData.map(prof => ({
+        ...prof,
+        name: `${prof.name}`,
+        type: 'professor'
+      }));
+      const formattedCourses = coursesData.map(course => ({
+        ...course,
+        name: `${course.Course}`,
+        type: 'course'
+      }));
+      setItems([...formattedProfessors, ...formattedCourses]);
+    })
+    .catch(error => console.error('Error fetching data: ', error));
   }, []);
+  
   
   
 
@@ -34,8 +45,13 @@ function SearchBar() {
   }
 
   const handleOnSelect = (item) => {
-    navigate(`/professors/${item.id}`); 
-  }
+    if (item.type === 'professor') {
+      navigate(`/professors/${item._id}`);
+    } else if (item.type === 'course') {
+      navigate(`/courses/${item.name}`); // Adjust the route as needed
+    }
+  };
+  
 
   const handleOnFocus = () => {
     console.log('Focused')
@@ -44,11 +60,13 @@ function SearchBar() {
   const formatResult = (item) => {
     return (
       <>
-        {/* <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span> */}
-        <span style={{ display: 'block', textAlign: 'left' }}>Professor: {item.name}</span>
+        <span style={{ display: 'block', textAlign: 'left' }}>
+          {item.type === 'professor' ? `Professor: ${item.name}` : `Course: ${item.name}`}
+        </span>
       </>
     )
   }
+  
 
   return (
     <div className="App">
@@ -62,7 +80,7 @@ function SearchBar() {
             onFocus={handleOnFocus}
             autoFocus
             formatResult={formatResult}
-            placeholder="Find a professor..."
+            placeholder="Find a professor/course..."
           />
         </div>
       </header>
