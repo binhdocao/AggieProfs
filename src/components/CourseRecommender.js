@@ -12,6 +12,7 @@ function CourseRecommendationForm() {
   const params = useParams();
 
   const csvData = useContext(CSVDataContext);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   function aggregateProfessorData(classes) {
     const professorAggregates = {};
@@ -141,7 +142,7 @@ function CourseRecommendationForm() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:3001/modifiedRequest?dept=${dept}&number=${number}`);
+      const response = await fetch(`${apiUrl}/modifiedRequest?dept=${dept}&number=${number}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
