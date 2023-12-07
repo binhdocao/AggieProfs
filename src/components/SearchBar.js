@@ -2,35 +2,71 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import axios from 'axios';
 
 function SearchBar() {
 
 
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
-
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    Promise.all([
-      fetch(`${apiUrl}/professors`).then(res => res.json()),
-      fetch(`${apiUrl}/courses`).then(res => res.json())
-    ])
-    .then(([professorsData, coursesData]) => {
-      const formattedProfessors = professorsData.map(prof => ({
-        ...prof,
-        name: `${prof.name}`,
-        type: 'professor'
-      }));
-      const formattedCourses = coursesData.map(course => ({
-        ...course,
-        name: `${course.Course}`,
-        type: 'course'
-      }));
-      setItems([...formattedProfessors, ...formattedCourses]);
-    })
-    .catch(error => console.error('Error fetching data: ', error));
-  }, []);
+    const fetchProfessors = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/professors`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching professors:', error);
+        }
+    };
+
+    const fetchCourses = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/courses`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+        }
+    };
+
+    const loadData = async () => {
+      try {
+          const professorsPromise = fetchProfessors();
+          const coursesPromise = fetchCourses();
+  
+          const [professorsData, coursesData] = await Promise.all([professorsPromise, coursesPromise]);
+  
+          // Check if data is available before mapping
+          const formattedProfessors = professorsData ? professorsData.map(prof => ({
+              ...prof,
+              name: prof.name,
+              type: 'professor'
+          })) : [];
+  
+          const formattedCourses = coursesData ? coursesData.map(course => ({
+              ...course,
+              name: course.Course,
+              type: 'course'
+          })) : [];
+  
+          setItems([...formattedProfessors, ...formattedCourses]);
+      } catch (error) {
+          console.error('Error fetching data:', error);
+      }
+  };
+  
+
+    loadData();
+}, [apiUrl]);
+
+const handleOnSelect = (item) => {
+    if (item.type === 'professor') {
+        navigate(`/professors/${item._id}`);
+    } else if (item.type === 'course') {
+        navigate(`/courses/${item.name}`); // Adjust the route as needed
+    }
+};
   
   
   
@@ -47,15 +83,7 @@ function SearchBar() {
     console.log(result)
   }
 
-  const handleOnSelect = (item) => {
-    if (item.type === 'professor') {
-      navigate(`/professors/${item._id}`);
-    } else if (item.type === 'course') {
-      navigate(`/courses/${item.name}`); // Adjust the route as needed
-    }
-  };
   
-
   const handleOnFocus = () => {
     console.log('Focused')
   }
