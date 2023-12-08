@@ -8,6 +8,8 @@ function SearchBar() {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
+  
+
   useEffect(() => {
     Promise.all([
       fetch('/api/professors').then(res => res.json()),
@@ -78,6 +80,14 @@ function SearchBar() {
             onHover={handleOnHover}
             onSelect={handleOnSelect}
             onFocus={handleOnFocus}
+            fuseOptions={{
+            keys: ["name"],
+            threshold: 0.2,
+            isCaseSensitive: false,
+            shouldSort: true
+            ,includeMatches: true
+
+          }}
             autoFocus
             formatResult={formatResult}
             placeholder="Find a professor/course..."
