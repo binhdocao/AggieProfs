@@ -7,7 +7,7 @@ function ProfessorPage() {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`api/professors/${id}`)
+    fetch(`${apiUrl}/professors/${id}`)
       .then(response => response.json())
       .then(data => setProfessor(data))
       .catch(error => console.error('Error fetching professor data: ', error));

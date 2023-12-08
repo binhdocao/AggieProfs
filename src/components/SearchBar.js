@@ -14,7 +14,7 @@ function SearchBar() {
   useEffect(() => {
     const fetchProfessors = async () => {
         try {
-            const response = await axios.get(`/api/professors`);
+            const response = await axios.get(`api/professors`);
             return response.data;
         } catch (error) {
             console.error('Error fetching professors:', error);
@@ -23,7 +23,7 @@ function SearchBar() {
 
     const fetchCourses = async () => {
         try {
-            const response = await axios.get(`/api/courses`);
+            const response = await axios.get(`api/courses`);
             return response.data;
         } catch (error) {
             console.error('Error fetching courses:', error);
