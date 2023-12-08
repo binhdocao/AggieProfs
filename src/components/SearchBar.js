@@ -10,8 +10,8 @@ function SearchBar() {
 
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:3001/professors').then(res => res.json()),
-      fetch('http://localhost:3001/courses').then(res => res.json())
+      fetch('/api/professors').then(res => res.json()),
+      fetch('/api/courses').then(res => res.json())
     ])
     .then(([professorsData, coursesData]) => {
       const formattedProfessors = professorsData.map(prof => ({
