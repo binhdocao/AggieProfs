@@ -4,17 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 function SearchBar() {
-
-
+  // note: the id field is mandatory
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
-  const apiUrl = process.env.REACT_APP_API_URL;
-
   useEffect(() => {
     Promise.all([
-      fetch(`${apiUrl}/professors`).then(res => res.json()),
-      fetch(`${apiUrl}/courses`).then(res => res.json())
+      fetch('http://localhost:3001/professors').then(res => res.json()),
+      fetch('http://localhost:3001/courses').then(res => res.json())
     ])
     .then(([professorsData, coursesData]) => {
       const formattedProfessors = professorsData.map(prof => ({
