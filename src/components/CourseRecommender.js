@@ -141,7 +141,7 @@ function CourseRecommendationForm() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:3001/modifiedRequest?dept=${dept}&number=${number}`);
+      const response = await fetch(`/api/modifiedRequest?dept=${dept}&number=${number}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

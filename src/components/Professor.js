@@ -6,7 +6,7 @@ function ProfessorPage() {
   const [professor, setProfessor] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/professors/${id}`)
+    fetch(`/api/professors/${id}`)
       .then(response => response.json())
       .then(data => setProfessor(data))
       .catch(error => console.error('Error fetching professor data: ', error));
