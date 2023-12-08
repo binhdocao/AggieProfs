@@ -4,10 +4,9 @@ import { useParams } from 'react-router-dom';
 function ProfessorPage() {
   const { id } = useParams();
   const [professor, setProfessor] = useState(null);
-  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`${apiUrl}/professors/${id}`)
+    fetch(`http://localhost:3001/professors/${id}`)
       .then(response => response.json())
       .then(data => setProfessor(data))
       .catch(error => console.error('Error fetching professor data: ', error));
